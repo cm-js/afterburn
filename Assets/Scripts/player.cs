@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,7 +13,7 @@ public class player : MonoBehaviour
     void Start()
     {
         // Freezes the player in place
-        this.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
         isTouchingGround = false;
         isTouchingBarrier = false;
     }
@@ -24,7 +23,7 @@ public class player : MonoBehaviour
     public void PlayerStart()
     {
         // Disables all rigidbody contstraints
-        this.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
     }
 
 
@@ -36,7 +35,7 @@ public class player : MonoBehaviour
         {
             // Detects two different things to initiate a jump:
             // If W or UpArrow is pressed, and the player isn't already in the air
-            if ((Keyboard.current.wKey.isPressed || Keyboard.current.upArrowKey.isPressed) && isTouchingGround)
+            if ((Keyboard.current.wKey.isPressed || Keyboard.current.upArrowKey.isPressed) && (isTouchingGround || gameObject.transform.position.y <= -2.48))
             {
                 GetComponent<Rigidbody2D>().linearVelocity = new Vector2(GetComponent<Rigidbody2D>().linearVelocity.x, 8);
                 Debug.Log("Player has jumped!");
@@ -68,9 +67,17 @@ public class player : MonoBehaviour
         if (collision.gameObject.CompareTag("Barrier"))
         {
             Debug.LogWarning("Barrier hit!");
-            // TODO -- Fix downward velocity when moving into a barrier
-            GetComponent<Rigidbody2D>().linearVelocity = new Vector2(-1.001f * transform.position.x, GetComponent<Rigidbody2D>().linearVelocity.y);
             isTouchingBarrier = true;
+
+            // End the game (or modify lives if added later)
+            gameManager.gameOver = true;
+            transform.position = new Vector3(0, 0, transform.position.z);
+
+            // Freezes the player in place
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
+
+            // Runs "game end" functions in other scripts
+            gameManager.gameEnd();
         }
         if (collision.gameObject.CompareTag("Ground"))
         {

@@ -18,6 +18,7 @@ public class gameManager : MonoBehaviour
 
     [Header("Game Management Vars")]
     public bool gameStarted;
+    public bool gameOver;
     public float speed;
 
     [Header("Score Vars")]
@@ -35,6 +36,7 @@ public class gameManager : MonoBehaviour
     void Awake()
     {
         gameStarted = false;
+        gameOver = false;
         distance = 0;
         score = 0;
 
@@ -65,7 +67,7 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameStarted)
+        if (gameStarted && !gameOver)
         {
             // Updates the text fields of the TextMeshPro objects
             distanceDisplay.text = "Distance: " + (Math.Round(distance * 10) / 10).ToString();
@@ -74,5 +76,13 @@ public class gameManager : MonoBehaviour
             // Updates distance based on speed
             distance += speed * Time.deltaTime;
         }
+    }
+
+    public void gameEnd()
+    {
+        obstacleManager.gameEnd();
+
+        if (score > highScore) highScore = score;
+        if (distance > bestDistance) bestDistance = distance;
     }
 }
