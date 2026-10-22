@@ -15,6 +15,10 @@ public class gameManager : MonoBehaviour
     public Button startButton;
     [Space(5)]
     public GameObject overheadUI;
+    [Space(5)]
+    public GameObject gameOverMenu;
+    public Button restartButton;
+    public Button returnMenuButton;
 
     [Header("Game Management Vars")]
     public bool gameStarted;
@@ -42,6 +46,7 @@ public class gameManager : MonoBehaviour
 
         overheadUI.SetActive(false);
         startMenu.SetActive(true);
+        gameOverMenu.SetActive(false);
     }
 
 
@@ -50,6 +55,10 @@ public class gameManager : MonoBehaviour
     {
         // Voids the function if the game already started.
         if (gameStarted) return;
+
+        // Reset scoring & other variables
+        score = 0;
+        distance = 0;
 
         // Lets other scripts know the game has started
         gameStarted = true;
@@ -84,5 +93,28 @@ public class gameManager : MonoBehaviour
 
         if (score > highScore) highScore = score;
         if (distance > bestDistance) bestDistance = distance;
+
+        gameOver = true;
+        gameStarted = false;
+
+        overheadUI.SetActive(false);
+        gameOverMenu.SetActive(true);
+    }
+
+    public void gameRestart()
+    {
+        Debug.Log("Restarting game...");
+        gameOverMenu.SetActive(false);
+        gameOver = false;
+
+        gameStart();
+    }
+
+    public void backToMenu()
+    {
+        Debug.Log("Going back to menu...");
+        gameOverMenu.SetActive(false);
+        gameOver = false;
+        startMenu.SetActive(true);
     }
 }

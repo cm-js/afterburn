@@ -13,7 +13,9 @@ public class player : MonoBehaviour
     void Start()
     {
         // Freezes the player in place
-        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+
+        // Update detection variables
         isTouchingGround = false;
         isTouchingBarrier = false;
     }
@@ -22,8 +24,11 @@ public class player : MonoBehaviour
     // This function is called in gameManager.cs
     public void PlayerStart()
     {
-        // Disables all rigidbody contstraints
-        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+        // Disables all rigidbody contstraints but prevents the player from falling over
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+
+        // Moves the player to a reasonable spot
+        transform.position = new Vector3(-5, 0, transform.position.z);
     }
 
 
@@ -71,10 +76,9 @@ public class player : MonoBehaviour
 
             // End the game (or modify lives if added later)
             gameManager.gameOver = true;
-            transform.position = new Vector3(0, 0, transform.position.z);
 
             // Freezes the player in place
-            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
 
             // Runs "game end" functions in other scripts
             gameManager.gameEnd();

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class obstacleManager : MonoBehaviour
@@ -51,6 +50,12 @@ public class obstacleManager : MonoBehaviour
                 // Set the opacity of the glow based on the player's distance to it
                 rend.color = new Color32(255, 0, 0, (byte)opacity);
             }
+        }
+
+        // Disables the barrier glows if no game is active
+        for (int i = 0;i < barrierGlows.Length; i++)
+        {
+            barrierGlows[i].SetActive(gameManager.gameStarted);
         }
     }
 
