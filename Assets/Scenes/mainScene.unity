@@ -172,6 +172,9 @@ MonoBehaviour:
   barrierGlows:
   - {fileID: 1781522254}
   - {fileID: 982391658}
+  obstacles:
+  - {fileID: 4693151697094930368, guid: 303d3bbfb21a7a149a2b1119cba8fe40, type: 3}
+  cooldownTimer: 0
 --- !u!1 &263062594
 GameObject:
   m_ObjectHideFlags: 0

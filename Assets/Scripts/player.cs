@@ -74,18 +74,19 @@ public class player : MonoBehaviour
             Debug.LogWarning("Barrier hit!");
             isTouchingBarrier = true;
 
-            // End the game (or modify lives if added later)
-            gameManager.gameOver = true;
-
-            // Freezes the player in place
-            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-
-            // Runs "game end" functions in other scripts
-            gameManager.gameEnd();
+            playerKill();
         }
+
         if (collision.gameObject.CompareTag("Ground"))
         {
             isTouchingGround = true;
+        }
+
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Debug.LogError("Enemy hit!");
+
+            playerKill();
         }
     }
 
@@ -100,5 +101,17 @@ public class player : MonoBehaviour
         {
             isTouchingGround = false;
         }
+    }
+
+    private void playerKill()
+    {
+        // End the game (or modify lives if added later)
+        gameManager.gameOver = true;
+
+        // Freezes the player in place
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+
+        // Runs "game end" functions in other scripts
+        gameManager.gameEnd();
     }
 }

@@ -9,6 +9,10 @@ public class obstacleManager : MonoBehaviour
     [Header("Objects")]
     public GameObject[] groundObjects;
     public GameObject[] barrierGlows;
+    public GameObject[] obstacles;
+
+    [Header("Variables")]
+    public float cooldownTimer;
 
     void Start()
     {  
@@ -50,6 +54,15 @@ public class obstacleManager : MonoBehaviour
                 // Set the opacity of the glow based on the player's distance to it
                 rend.color = new Color32(255, 0, 0, (byte)opacity);
             }
+
+            // Spawns obstacles after a randomised cooldown
+            cooldownTimer -= Time.deltaTime;
+            if (cooldownTimer < 0.01)
+            {
+                cooldownTimer = Random.Range(2f, 8f);
+                Instantiate(obstacles[Random.Range(0, obstacles.Length)]);
+            }
+
         }
 
         // Disables the barrier glows if no game is active
@@ -66,5 +79,10 @@ public class obstacleManager : MonoBehaviour
         {
             barrierGlows[i].GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, 0);
         }
+
+        // Update variables
+        cooldownTimer = 0;
+
+        // TODO -- Remove all existing obstacles
     }
 }
