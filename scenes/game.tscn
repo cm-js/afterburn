@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://cftsko0pimo0r" path="res://scripts/game_manager.gd" id="2_iywne"]
 [ext_resource type="Texture2D" uid="uid://52revbk54m4t" path="res://assets/textures/tempBG.jpg" id="2_lnu2h"]
 [ext_resource type="Texture2D" uid="uid://cbucn835rislh" path="res://assets/textures/square.png" id="2_yqjtg"]
+[ext_resource type="Script" uid="uid://btr8lrcso2h7o" path="res://scripts/ui_button.gd" id="6_p57ef"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_uwrxv"]
 
@@ -116,6 +117,8 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Start"
 horizontal_alignment = 1
+script = ExtResource("6_p57ef")
+buttonFunction = "Start"
 
 [node name="OptionsButton" type="Label" parent="UI/TitleScreen/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1425668057]
 layout_mode = 2
