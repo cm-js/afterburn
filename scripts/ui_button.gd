@@ -17,7 +17,13 @@ func _gui_input(event: InputEvent) -> void:
 			detectFunction()
 
 func detectFunction() -> void:
-	if buttonFunction == "Start":
+	if buttonFunction == "Start" || buttonFunction == "Continue":
 		# Start the game
 		game_manager.game_state = "active"
 		game_manager.swap_ui(1)
+	
+	if buttonFunction == "ToMenu":
+		# End the game
+		game_manager.game_state = "inactive"
+		game_manager.swap_ui(0)
+		game_manager.game_reset()

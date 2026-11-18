@@ -20,11 +20,9 @@ var best_score
 # Various UIs to toggle
 @onready var UI_elements = [
 	$"../../UI/TitleScreen", # The Title Screen
-	$"../../UI/GameTrackers" # HUD, like Score & Distance
+	$"../../UI/GameTrackers", # HUD, like Score & Distance
+	$"../../UI/PauseMenu" # Pause Menu
 ]
-
-@onready var title_screen = $"../../UI/TitleScreen"
-@onready var game_trackers = $"../../UI/GameTrackers"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -41,7 +39,6 @@ func _ready() -> void:
 	distance = 0
 	score = 0
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if game_state == "active":
@@ -51,6 +48,16 @@ func _process(delta: float) -> void:
 		# Set UI labels
 		distance_label.text = "Distance: " + str(int(round(distance)))
 		score_label.text = "Score: " + str(score)
+
+# Runs on key input
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		if game_state == "active":
+			game_state = "paused"
+			swap_ui(2)
+		elif game_state == "paused":
+			game_state = "active"
+			swap_ui(1)
 
 func swap_ui(num: int) -> void:
 	# Loop for each UI element
@@ -68,4 +75,8 @@ func swap_ui(num: int) -> void:
 			# Hide every child of any other UI node
 			for child in node.get_children():
 				child.hide()
-		
+
+# Reset the game
+func game_reset() -> void:
+	distance = 0
+	score = 0

@@ -4,8 +4,12 @@ extends CharacterBody2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -450.0
 
+@onready var game_manager = $"%Managers/GameManager"
 
 func _physics_process(delta: float) -> void:
+	# Don't run physics calculations if the game isn't active
+	if (game_manager.game_state != "active"): return
+	
 	# Add the gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta

@@ -5,7 +5,11 @@
 [ext_resource type="Script" uid="uid://cftsko0pimo0r" path="res://scripts/game_manager.gd" id="2_iywne"]
 [ext_resource type="Texture2D" uid="uid://52revbk54m4t" path="res://assets/textures/tempBG.jpg" id="2_lnu2h"]
 [ext_resource type="Texture2D" uid="uid://cbucn835rislh" path="res://assets/textures/square.png" id="2_yqjtg"]
+[ext_resource type="Script" uid="uid://diw5njl7cgqi5" path="res://addons/richtext2/text_effects/effects/rte_sparkle.gd" id="6_0tnpc"]
+[ext_resource type="Script" uid="uid://dhbxvg36y8pfd" path="res://addons/richtext2/text_effects/effects/rte_curspull.gd" id="6_gee14"]
 [ext_resource type="Script" uid="uid://btr8lrcso2h7o" path="res://scripts/ui_button.gd" id="6_p57ef"]
+[ext_resource type="Script" uid="uid://2f4fi75scxes" path="res://addons/richtext2/richer_text_label.gd" id="6_u5sy4"]
+[ext_resource type="Script" uid="uid://cuyp5kmoygg6s" path="res://addons/richtext2/text_effects/effects/rte_jit2.gd" id="8_vtaks"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_uwrxv"]
 
@@ -14,6 +18,21 @@
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_iywne"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_57nd2"]
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_vtaks"]
+resource_name = "sparkle"
+script = ExtResource("6_0tnpc")
+metadata/rt = 1554912450473
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_kvpfn"]
+resource_name = "curspull"
+script = ExtResource("6_gee14")
+metadata/rt = 1554912450473
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_dinhu"]
+resource_name = "jit2"
+script = ExtResource("8_vtaks")
+metadata/rt = 1554912450473
 
 [node name="Game" type="Node2D" unique_id=312370892]
 
@@ -76,7 +95,6 @@ texture = ExtResource("2_yqjtg")
 [node name="TitleScreen" type="Node" parent="UI" unique_id=606326076]
 
 [node name="Background" type="TextureRect" parent="UI/TitleScreen" unique_id=1902371414]
-visible = false
 modulate = Color(0.1, 0.1, 0.1, 1)
 material = SubResource("CanvasItemMaterial_57nd2")
 offset_right = 1152.0
@@ -84,7 +102,6 @@ offset_bottom = 648.0
 texture = ExtResource("2_yqjtg")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/TitleScreen" unique_id=2830725]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -102,11 +119,73 @@ layout_mode = 2
 theme_override_constants/separation = 100
 alignment = 1
 
-[node name="Title" type="Label" parent="UI/TitleScreen/MarginContainer/VBoxContainer" unique_id=1352078872]
+[node name="Title" type="RichTextLabel" parent="UI/TitleScreen/MarginContainer/VBoxContainer" unique_id=989993946]
+custom_minimum_size = Vector2(0, 264)
+clip_contents = false
 layout_mode = 2
-theme_override_font_sizes/font_size = 120
-text = "AFTERBURN"
-horizontal_alignment = 1
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 96
+theme_override_font_sizes/bold_font_size = 96
+theme_override_font_sizes/bold_italics_font_size = 96
+theme_override_font_sizes/italics_font_size = 96
+theme_override_font_sizes/mono_font_size = 96
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+custom_effects = [SubResource("RichTextEffect_vtaks"), SubResource("RichTextEffect_kvpfn"), SubResource("RichTextEffect_dinhu")]
+script = ExtResource("6_u5sy4")
+bbcode = "[center][sparkle][#ff5555][curspull pull:-1][jit2]AFTERBURN"
+effects = 2
+alignment = 1
+color = Color(1, 1, 1, 1)
+emoji_scale = 1.0
+font = ""
+font_auto_setup = true
+font_size = 96
+font_bold_weight = 1.5
+font_italics_slant = 0.25
+font_italics_weight = -0.25
+shadow_enabled = false
+shadow_offset = 0.08
+shadow_alpha = 0.25
+shadow_outline_size = 0.1
+outline_size = 0
+outline_mode = 1
+outline_adjust = 0.8
+outline_hue_adjust = 0.0125
+nicer_quotes_enabled = true
+nicer_quotes_format = "“%s”"
+markdown_enabled = true
+markdown_format_bold = "[b]%s[]"
+markdown_format_italics = "[i]%s[]"
+markdown_format_bold_italics = "[bi]%s[]"
+markdown_format_highlight = "[green;sin]%s[]"
+markdown_format_bold2 = "[b]*%s*[]"
+markdown_format_italics2 = "[i;gray]*%s*[]"
+markdown_format_bold_italics2 = "%s"
+context_enabled = true
+context_path = NodePath("/root/State")
+context_state = {}
+context_rich_objects = true
+context_rich_ints = true
+context_rich_array = true
+autostyle_numbers = true
+autostyle_numbers_tag = "[salmon]%s[]"
+autostyle_numbers_pad_decimals = true
+autostyle_numbers_decimals = 2
+autostyle_emojis = true
+effect_weight = 0.0
+image_path = "res://"
+image_resize_to_font_size = true
+image_scale = 1.0
+meta_auto_https = true
+meta_cursor = 2
+override_bbcodeEnabled = true
+override_clipContents = false
+override_fitContent = true
+metadata/mouse_position = Vector2(1142.6447, 183.94717)
+metadata/frame = 70147
+metadata/rand = Array[int]([4131503738, 2067234231, 3217171959, 2380741849, 670411714, 1348014931, 1265928894, 2290086901, 3479658666])
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/TitleScreen/MarginContainer/VBoxContainer" unique_id=1319595190]
 layout_mode = 2
@@ -126,9 +205,20 @@ theme_override_font_sizes/font_size = 36
 text = "Options"
 horizontal_alignment = 1
 
+[node name="Invis" type="Label" parent="UI/TitleScreen/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1775342252]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+horizontal_alignment = 1
+
+[node name="Invis2" type="Label" parent="UI/TitleScreen/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1269826664]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+horizontal_alignment = 1
+
 [node name="GameTrackers" type="Node" parent="UI" unique_id=1313555663]
 
 [node name="DistanceLabel" type="Label" parent="UI/GameTrackers" unique_id=1175929860]
+visible = false
 z_index = 1
 offset_left = 10.0
 offset_right = 434.0
@@ -138,6 +228,7 @@ theme_override_font_sizes/font_size = 36
 text = "Distance: uhhh"
 
 [node name="ScoreLabel" type="Label" parent="UI/GameTrackers" unique_id=1123543387]
+visible = false
 z_index = 1
 offset_left = 10.0
 offset_top = 40.0
@@ -146,3 +237,58 @@ offset_bottom = 90.0
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 36
 text = "Score: beats me"
+
+[node name="PauseMenu" type="Node" parent="UI" unique_id=2005411284]
+
+[node name="Background" type="TextureRect" parent="UI/PauseMenu" unique_id=179789415]
+visible = false
+modulate = Color(0, 0, 0, 0.7058824)
+material = SubResource("CanvasItemMaterial_57nd2")
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("2_yqjtg")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/PauseMenu" unique_id=1519958498]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PauseMenu/MarginContainer" unique_id=1264246607]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="Title" type="Label" parent="UI/PauseMenu/MarginContainer/VBoxContainer" unique_id=1208618633]
+layout_mode = 2
+theme_override_font_sizes/font_size = 72
+text = "GAME PAUSED"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PauseMenu/MarginContainer/VBoxContainer" unique_id=1383759693]
+layout_mode = 2
+alignment = 1
+
+[node name="StartButton" type="Label" parent="UI/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer" unique_id=519327316]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Continue"
+horizontal_alignment = 1
+script = ExtResource("6_p57ef")
+buttonFunction = "Continue"
+
+[node name="OptionsButton" type="Label" parent="UI/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer" unique_id=849843671]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Back to Menu"
+horizontal_alignment = 1
+script = ExtResource("6_p57ef")
+buttonFunction = "ToMenu"
