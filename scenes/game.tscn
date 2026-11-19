@@ -22,17 +22,17 @@
 [sub_resource type="RichTextEffect" id="RichTextEffect_vtaks"]
 resource_name = "sparkle"
 script = ExtResource("6_0tnpc")
-metadata/rt = 1554912450473
+metadata/rt = 1532917520271
 
 [sub_resource type="RichTextEffect" id="RichTextEffect_kvpfn"]
 resource_name = "curspull"
 script = ExtResource("6_gee14")
-metadata/rt = 1554912450473
+metadata/rt = 1532917520271
 
 [sub_resource type="RichTextEffect" id="RichTextEffect_dinhu"]
 resource_name = "jit2"
 script = ExtResource("8_vtaks")
-metadata/rt = 1554912450473
+metadata/rt = 1532917520271
 
 [node name="Game" type="Node2D" unique_id=312370892]
 
@@ -95,6 +95,7 @@ texture = ExtResource("2_yqjtg")
 [node name="TitleScreen" type="Node" parent="UI" unique_id=606326076]
 
 [node name="Background" type="TextureRect" parent="UI/TitleScreen" unique_id=1902371414]
+visible = false
 modulate = Color(0.1, 0.1, 0.1, 1)
 material = SubResource("CanvasItemMaterial_57nd2")
 offset_right = 1152.0
@@ -102,6 +103,7 @@ offset_bottom = 648.0
 texture = ExtResource("2_yqjtg")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/TitleScreen" unique_id=2830725]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -123,7 +125,7 @@ alignment = 1
 custom_minimum_size = Vector2(0, 264)
 clip_contents = false
 layout_mode = 2
-theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.19999999, 0.19999999, 0.19999999, 1)
 theme_override_font_sizes/normal_font_size = 96
 theme_override_font_sizes/bold_font_size = 96
 theme_override_font_sizes/bold_italics_font_size = 96
@@ -163,7 +165,7 @@ markdown_format_highlight = "[green;sin]%s[]"
 markdown_format_bold2 = "[b]*%s*[]"
 markdown_format_italics2 = "[i;gray]*%s*[]"
 markdown_format_bold_italics2 = "%s"
-context_enabled = true
+context_enabled = false
 context_path = NodePath("/root/State")
 context_state = {}
 context_rich_objects = true
@@ -178,13 +180,13 @@ effect_weight = 0.0
 image_path = "res://"
 image_resize_to_font_size = true
 image_scale = 1.0
-meta_auto_https = true
+meta_auto_https = false
 meta_cursor = 2
 override_bbcodeEnabled = true
 override_clipContents = false
 override_fitContent = true
-metadata/mouse_position = Vector2(1142.6447, 183.94717)
-metadata/frame = 70147
+metadata/mouse_position = Vector2(-247.12561, 367.26297)
+metadata/frame = 141305
 metadata/rand = Array[int]([4131503738, 2067234231, 3217171959, 2380741849, 670411714, 1348014931, 1265928894, 2290086901, 3479658666])
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/TitleScreen/MarginContainer/VBoxContainer" unique_id=1319595190]
@@ -198,12 +200,16 @@ text = "Start"
 horizontal_alignment = 1
 script = ExtResource("6_p57ef")
 buttonFunction = "Start"
+hoverColor = Color(0.7, 0.7, 0.7, 1)
 
 [node name="OptionsButton" type="Label" parent="UI/TitleScreen/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1425668057]
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Options"
 horizontal_alignment = 1
+script = ExtResource("6_p57ef")
+buttonFunction = "N/A"
+hoverColor = Color(0.85390246, 0.6427699, 0.6388989, 1)
 
 [node name="Invis" type="Label" parent="UI/TitleScreen/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1775342252]
 layout_mode = 2
@@ -284,6 +290,7 @@ text = "Continue"
 horizontal_alignment = 1
 script = ExtResource("6_p57ef")
 buttonFunction = "Continue"
+hoverColor = Color(0.7, 0.7, 0.7, 1)
 
 [node name="OptionsButton" type="Label" parent="UI/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer" unique_id=849843671]
 layout_mode = 2
@@ -292,3 +299,13 @@ text = "Back to Menu"
 horizontal_alignment = 1
 script = ExtResource("6_p57ef")
 buttonFunction = "ToMenu"
+hoverColor = Color(0.7, 0.7, 0.7, 1)
+
+[connection signal="mouse_entered" from="UI/TitleScreen/MarginContainer/VBoxContainer/VBoxContainer/StartButton" to="UI/TitleScreen/MarginContainer/VBoxContainer/VBoxContainer/StartButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/TitleScreen/MarginContainer/VBoxContainer/VBoxContainer/StartButton" to="UI/TitleScreen/MarginContainer/VBoxContainer/VBoxContainer/StartButton" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="UI/TitleScreen/MarginContainer/VBoxContainer/VBoxContainer/OptionsButton" to="UI/TitleScreen/MarginContainer/VBoxContainer/VBoxContainer/OptionsButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/TitleScreen/MarginContainer/VBoxContainer/VBoxContainer/OptionsButton" to="UI/TitleScreen/MarginContainer/VBoxContainer/VBoxContainer/OptionsButton" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="UI/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer/StartButton" to="UI/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer/StartButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer/StartButton" to="UI/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer/StartButton" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="UI/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer/OptionsButton" to="UI/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer/OptionsButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer/OptionsButton" to="UI/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer/OptionsButton" method="_on_mouse_exited"]
