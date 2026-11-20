@@ -1,7 +1,7 @@
 extends Node
 
 # Reference other managers
-@onready var game_manager = $"../GameManager"
+@onready var game_manager = $"%Managers/GameManager"
 
 # Object lists
 @export var ground_objs: Array[StaticBody2D] = []
@@ -23,4 +23,4 @@ func _process(delta: float) -> void:
 			
 			# Move object back to the right if off-screen
 			if ground_objs[i].position.x < -2500:
-				ground_objs[i].position += Vector2(5000, 0)
+				ground_objs[i].position += Vector2(6400, 0)

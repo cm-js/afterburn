@@ -13,6 +13,11 @@ var best_distance
 var score
 var best_score
 
+# Enemy management
+@export var BASE_ENEMY_SPAWNRATE: float
+var enemy_cooldown
+var enemy_cooldown_cur
+
 # Reference displays to set
 @onready var distance_label = $"../../UI/GameTrackers/DistanceLabel"
 @onready var score_label = $"../../UI/GameTrackers/ScoreLabel"
@@ -21,7 +26,8 @@ var best_score
 @onready var UI_elements = [
 	$"../../UI/TitleScreen", # The Title Screen
 	$"../../UI/GameTrackers", # HUD, like Score & Distance
-	$"../../UI/PauseMenu" # Pause Menu
+	$"../../UI/PauseMenu", # Pause Menu
+	$"../../UI/GameOver" # Game Over Screen
 ]
 
 # Called when the node enters the scene tree for the first time.
@@ -36,8 +42,10 @@ func _ready() -> void:
 	
 	# Initialize game variables
 	game_state = "inactive"
-	distance = 0
-	score = 0
+	game_reset()
+	# TODO -- Saving system for best vars
+	best_distance = 0
+	best_score = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -48,6 +56,20 @@ func _process(delta: float) -> void:
 		# Set UI labels
 		distance_label.text = "Distance: " + str(int(round(distance)))
 		score_label.text = "Score: " + str(score)
+		
+		# Process enemy spawning
+		enemy_cooldown_cur -= delta
+		if (enemy_cooldown_cur <= 0):
+			enemy_cooldown_cur = enemy_cooldown
+			
+			# Clone eneny.tscn with random enemy type
+			var enemy = load("res://scenes/enemy.tscn")
+			var instance = enemy.instantiate()
+			add_child(instance)
+			print("Enemy loaded.")
+		
+		# Set enemy cooldown relative to distance traveled
+		enemy_cooldown = BASE_ENEMY_SPAWNRATE - (0.35 * log(distance + 1))
 
 # Runs on key input
 func _input(event: InputEvent) -> void:
@@ -76,7 +98,25 @@ func swap_ui(num: int) -> void:
 			for child in node.get_children():
 				child.hide()
 
+# Runs when the player collides with an enemy
+func game_over() -> void:
+	swap_ui(3)
+	game_state = "inactive"
+	if (score > best_score): best_score = score
+	if (distance > best_distance): best_distance = distance
+
 # Reset the game
 func game_reset() -> void:
 	distance = 0
 	score = 0
+	
+	# Reset the player's position to the center
+	player.position = Vector2(0, -30)
+	# Add a little jump when respawning the player
+	player.velocity = Vector2(0, -300)
+	
+	# Reset enemy spawning conditionals
+	enemy_cooldown = BASE_ENEMY_SPAWNRATE
+	enemy_cooldown_cur = enemy_cooldown
+	
+	# TODO - Delete all instantiated enemy nodes

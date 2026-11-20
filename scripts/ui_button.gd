@@ -33,9 +33,11 @@ func detectFunction() -> void:
 		# Start the game
 		game_manager.game_state = "active"
 		game_manager.swap_ui(1)
+		# Only reset game info if it's a new game
+		if buttonFunction == "Start":
+			game_manager.game_reset()
 	
 	if buttonFunction == "ToMenu":
 		# End the game
 		game_manager.game_state = "inactive"
 		game_manager.swap_ui(0)
-		game_manager.game_reset()

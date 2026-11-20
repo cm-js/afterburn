@@ -7,6 +7,7 @@
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_57nd2"]
 
 [node name="Player" type="CharacterBody2D" unique_id=872563649]
+collision_mask = 6
 script = ExtResource("1_3vyb7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=221364571]
