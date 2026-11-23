@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cbucn835rislh" path="res://assets/textures/square.png" id="2_yqjtg"]
 [ext_resource type="Script" uid="uid://diw5njl7cgqi5" path="res://addons/richtext2/text_effects/effects/rte_sparkle.gd" id="6_0tnpc"]
 [ext_resource type="Script" uid="uid://dhbxvg36y8pfd" path="res://addons/richtext2/text_effects/effects/rte_curspull.gd" id="6_gee14"]
+[ext_resource type="Script" uid="uid://cumf5185ecc01" path="res://scripts/enemy.gd" id="6_kvpfn"]
 [ext_resource type="Script" uid="uid://btr8lrcso2h7o" path="res://scripts/ui_button.gd" id="6_p57ef"]
 [ext_resource type="Script" uid="uid://2f4fi75scxes" path="res://addons/richtext2/richer_text_label.gd" id="6_u5sy4"]
 [ext_resource type="Script" uid="uid://cuyp5kmoygg6s" path="res://addons/richtext2/text_effects/effects/rte_jit2.gd" id="8_vtaks"]
@@ -15,24 +16,61 @@
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_p57ef"]
 
+[sub_resource type="Gradient" id="Gradient_trtic"]
+colors = PackedColorArray(1, 1, 1, 1, 0.7, 0.7, 0.7, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_trtic"]
+gradient = SubResource("Gradient_trtic")
+width = 32
+height = 32
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_iywne"]
+
+[sub_resource type="Gradient" id="Gradient_ir15t"]
+colors = PackedColorArray(0.7, 0.7, 0.7, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rysoc"]
+gradient = SubResource("Gradient_ir15t")
+width = 32
+height = 32
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_57nd2"]
+
+[sub_resource type="Gradient" id="Gradient_kvpfn"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_57nd2"]
+gradient = SubResource("Gradient_kvpfn")
+
+[sub_resource type="Gradient" id="Gradient_dinhu"]
+colors = PackedColorArray(1, 0, 0, 0, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kvpfn"]
+gradient = SubResource("Gradient_dinhu")
+
+[sub_resource type="Gradient" id="Gradient_kvuet"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dinhu"]
+gradient = SubResource("Gradient_kvuet")
+fill_to = Vector2(0, 1)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_57nd2"]
 
-[sub_resource type="RichTextEffect" id="RichTextEffect_vtaks"]
+[sub_resource type="RichTextEffect" id="RichTextEffect_kvpfn"]
 resource_name = "sparkle"
 script = ExtResource("6_0tnpc")
-metadata/rt = 1554912450473
-
-[sub_resource type="RichTextEffect" id="RichTextEffect_kvpfn"]
-resource_name = "curspull"
-script = ExtResource("6_gee14")
-metadata/rt = 1554912450473
+metadata/rt = 8801663133295
 
 [sub_resource type="RichTextEffect" id="RichTextEffect_dinhu"]
+resource_name = "curspull"
+script = ExtResource("6_gee14")
+metadata/rt = 8801663133295
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_kvuet"]
 resource_name = "jit2"
 script = ExtResource("8_vtaks")
-metadata/rt = 1554912450473
+metadata/rt = 8801663133295
 
 [node name="Game" type="Node2D" unique_id=312370892]
 
@@ -45,6 +83,7 @@ ground_objs = [NodePath("../../Ground/Ground1"), NodePath("../../Ground/Ground2"
 
 [node name="GameManager" type="Node" parent="Managers" unique_id=431671816]
 script = ExtResource("2_iywne")
+BASE_ENEMY_SPAWNRATE = 3.0
 
 [node name="Player" parent="." unique_id=872563649 instance=ExtResource("1_uwrxv")]
 position = Vector2(0, -100)
@@ -68,6 +107,7 @@ texture = ExtResource("2_lnu2h")
 
 [node name="Ground1" type="StaticBody2D" parent="Ground" unique_id=1960549419]
 material = SubResource("CanvasItemMaterial_uwrxv")
+collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground/Ground1" unique_id=797482245]
 shape = SubResource("WorldBoundaryShape2D_p57ef")
@@ -75,26 +115,79 @@ shape = SubResource("WorldBoundaryShape2D_p57ef")
 [node name="Sprite2D" type="Sprite2D" parent="Ground/Ground1" unique_id=2142643999]
 position = Vector2(0, 80)
 scale = Vector2(100, 5)
-texture = ExtResource("2_yqjtg")
+texture = SubResource("GradientTexture2D_trtic")
 
 [node name="Ground2" type="StaticBody2D" parent="Ground" unique_id=119359094]
 material = SubResource("CanvasItemMaterial_uwrxv")
 position = Vector2(3200, 0)
+collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground/Ground2" unique_id=1336439626]
 shape = SubResource("WorldBoundaryShape2D_iywne")
 
 [node name="Sprite2D" type="Sprite2D" parent="Ground/Ground2" unique_id=1125323932]
-modulate = Color(0, 1, 1, 1)
 position = Vector2(0, 80)
 scale = Vector2(100, 5)
-texture = ExtResource("2_yqjtg")
+texture = SubResource("GradientTexture2D_rysoc")
+
+[node name="ArenaBorders" type="Node" parent="." unique_id=1502354904]
+
+[node name="L_Border" type="Area2D" parent="ArenaBorders" unique_id=1196918401]
+position = Vector2(-900, -470)
+scale = Vector2(1, 40)
+collision_layer = 2
+script = ExtResource("6_kvpfn")
+enemyType = "Border"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArenaBorders/L_Border" unique_id=261625816]
+position = Vector2(-9, 0.025000002)
+scale = Vector2(1, 1.2)
+shape = SubResource("RectangleShape2D_57nd2")
+
+[node name="Sprite2D" type="Sprite2D" parent="ArenaBorders/L_Border" unique_id=2057029569]
+position = Vector2(23, 0)
+texture = SubResource("GradientTexture2D_57nd2")
+
+[node name="R_Border" type="Area2D" parent="ArenaBorders" unique_id=900773948]
+position = Vector2(900, -470)
+scale = Vector2(1, 40)
+collision_layer = 2
+script = ExtResource("6_kvpfn")
+enemyType = "Border"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArenaBorders/R_Border" unique_id=1866364263]
+position = Vector2(9, 0)
+scale = Vector2(1, 1.2)
+shape = SubResource("RectangleShape2D_57nd2")
+
+[node name="Sprite2D" type="Sprite2D" parent="ArenaBorders/R_Border" unique_id=1888488485]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(-23, 0)
+texture = SubResource("GradientTexture2D_kvpfn")
+
+[node name="U_Border" type="Area2D" parent="ArenaBorders" unique_id=269452436]
+position = Vector2(0, -900)
+scale = Vector2(80, 1)
+collision_layer = 2
+script = ExtResource("6_kvpfn")
+enemyType = "Border"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArenaBorders/U_Border" unique_id=326750343]
+position = Vector2(0, -9)
+scale = Vector2(1.2, 1)
+shape = SubResource("RectangleShape2D_57nd2")
+
+[node name="Sprite2D" type="Sprite2D" parent="ArenaBorders/U_Border" unique_id=1228526872]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(0, 23)
+texture = SubResource("GradientTexture2D_dinhu")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=145236019]
 
 [node name="TitleScreen" type="Node" parent="UI" unique_id=606326076]
 
 [node name="Background" type="TextureRect" parent="UI/TitleScreen" unique_id=1902371414]
+visible = false
 modulate = Color(0.1, 0.1, 0.1, 1)
 material = SubResource("CanvasItemMaterial_57nd2")
 offset_right = 1152.0
@@ -102,6 +195,7 @@ offset_bottom = 648.0
 texture = ExtResource("2_yqjtg")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/TitleScreen" unique_id=2830725]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -120,10 +214,10 @@ theme_override_constants/separation = 100
 alignment = 1
 
 [node name="Title" type="RichTextLabel" parent="UI/TitleScreen/MarginContainer/VBoxContainer" unique_id=989993946]
-custom_minimum_size = Vector2(0, 264)
+custom_minimum_size = Vector2(0, 1452)
 clip_contents = false
 layout_mode = 2
-theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.19999999, 0.19999999, 0.19999999, 1)
 theme_override_font_sizes/normal_font_size = 96
 theme_override_font_sizes/bold_font_size = 96
 theme_override_font_sizes/bold_italics_font_size = 96
@@ -132,7 +226,7 @@ theme_override_font_sizes/mono_font_size = 96
 bbcode_enabled = true
 fit_content = true
 scroll_active = false
-custom_effects = [SubResource("RichTextEffect_vtaks"), SubResource("RichTextEffect_kvpfn"), SubResource("RichTextEffect_dinhu")]
+custom_effects = [SubResource("RichTextEffect_kvpfn"), SubResource("RichTextEffect_dinhu"), SubResource("RichTextEffect_kvuet")]
 script = ExtResource("6_u5sy4")
 bbcode = "[center][sparkle][#ff5555][curspull pull:-1][jit2]AFTERBURN"
 effects = 2
@@ -163,7 +257,7 @@ markdown_format_highlight = "[green;sin]%s[]"
 markdown_format_bold2 = "[b]*%s*[]"
 markdown_format_italics2 = "[i;gray]*%s*[]"
 markdown_format_bold_italics2 = "%s"
-context_enabled = true
+context_enabled = false
 context_path = NodePath("/root/State")
 context_state = {}
 context_rich_objects = true
@@ -178,13 +272,13 @@ effect_weight = 0.0
 image_path = "res://"
 image_resize_to_font_size = true
 image_scale = 1.0
-meta_auto_https = true
+meta_auto_https = false
 meta_cursor = 2
 override_bbcodeEnabled = true
 override_clipContents = false
 override_fitContent = true
-metadata/mouse_position = Vector2(1142.6447, 183.94717)
-metadata/frame = 70147
+metadata/mouse_position = Vector2(-247.12561, 367.26297)
+metadata/frame = 141305
 metadata/rand = Array[int]([4131503738, 2067234231, 3217171959, 2380741849, 670411714, 1348014931, 1265928894, 2290086901, 3479658666])
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/TitleScreen/MarginContainer/VBoxContainer" unique_id=1319595190]
@@ -198,12 +292,16 @@ text = "Start"
 horizontal_alignment = 1
 script = ExtResource("6_p57ef")
 buttonFunction = "Start"
+hoverColor = Color(0.7, 0.7, 0.7, 1)
 
 [node name="OptionsButton" type="Label" parent="UI/TitleScreen/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1425668057]
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Options"
 horizontal_alignment = 1
+script = ExtResource("6_p57ef")
+buttonFunction = "N/A"
+hoverColor = Color(0.85390246, 0.6427699, 0.6388989, 1)
 
 [node name="Invis" type="Label" parent="UI/TitleScreen/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1775342252]
 layout_mode = 2
@@ -277,18 +375,95 @@ horizontal_alignment = 1
 layout_mode = 2
 alignment = 1
 
-[node name="StartButton" type="Label" parent="UI/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer" unique_id=519327316]
+[node name="ContinueButton" type="Label" parent="UI/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer" unique_id=519327316]
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Continue"
 horizontal_alignment = 1
 script = ExtResource("6_p57ef")
 buttonFunction = "Continue"
+hoverColor = Color(0.7, 0.7, 0.7, 1)
 
-[node name="OptionsButton" type="Label" parent="UI/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer" unique_id=849843671]
+[node name="MenuButton" type="Label" parent="UI/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer" unique_id=849843671]
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Back to Menu"
 horizontal_alignment = 1
 script = ExtResource("6_p57ef")
 buttonFunction = "ToMenu"
+hoverColor = Color(0.7, 0.7, 0.7, 1)
+
+[node name="GameOver" type="Node" parent="UI" unique_id=2119387926]
+
+[node name="Background" type="TextureRect" parent="UI/GameOver" unique_id=862075298]
+visible = false
+modulate = Color(0, 0, 0, 0.7058824)
+material = SubResource("CanvasItemMaterial_57nd2")
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("2_yqjtg")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/GameOver" unique_id=1556105571]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/GameOver/MarginContainer" unique_id=1331917458]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="Title" type="RichTextLabel" parent="UI/GameOver/MarginContainer/VBoxContainer" unique_id=1829444382]
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "[center][wave amp=15.0 freq=10.0 connected=1]GAME OVER"
+fit_content = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/GameOver/MarginContainer/VBoxContainer" unique_id=131938773]
+layout_mode = 2
+alignment = 1
+
+[node name="RestartButton" type="Label" parent="UI/GameOver/MarginContainer/VBoxContainer/VBoxContainer" unique_id=863387580]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Restart"
+horizontal_alignment = 1
+script = ExtResource("6_p57ef")
+buttonFunction = "Start"
+hoverColor = Color(0.7, 0.7, 0.7, 1)
+
+[node name="MenuButton" type="Label" parent="UI/GameOver/MarginContainer/VBoxContainer/VBoxContainer" unique_id=2013584604]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Back to Menu"
+horizontal_alignment = 1
+script = ExtResource("6_p57ef")
+buttonFunction = "ToMenu"
+hoverColor = Color(0.7, 0.7, 0.7, 1)
+
+[connection signal="body_entered" from="ArenaBorders/L_Border" to="ArenaBorders/L_Border" method="_on_body_entered"]
+[connection signal="body_entered" from="ArenaBorders/R_Border" to="ArenaBorders/R_Border" method="_on_body_entered"]
+[connection signal="body_entered" from="ArenaBorders/U_Border" to="ArenaBorders/U_Border" method="_on_body_entered"]
+[connection signal="mouse_entered" from="UI/TitleScreen/MarginContainer/VBoxContainer/VBoxContainer/StartButton" to="UI/TitleScreen/MarginContainer/VBoxContainer/VBoxContainer/StartButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/TitleScreen/MarginContainer/VBoxContainer/VBoxContainer/StartButton" to="UI/TitleScreen/MarginContainer/VBoxContainer/VBoxContainer/StartButton" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="UI/TitleScreen/MarginContainer/VBoxContainer/VBoxContainer/OptionsButton" to="UI/TitleScreen/MarginContainer/VBoxContainer/VBoxContainer/OptionsButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/TitleScreen/MarginContainer/VBoxContainer/VBoxContainer/OptionsButton" to="UI/TitleScreen/MarginContainer/VBoxContainer/VBoxContainer/OptionsButton" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="UI/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer/ContinueButton" to="UI/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer/ContinueButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer/ContinueButton" to="UI/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer/ContinueButton" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="UI/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer/MenuButton" to="UI/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer/MenuButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer/MenuButton" to="UI/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer/MenuButton" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="UI/GameOver/MarginContainer/VBoxContainer/VBoxContainer/RestartButton" to="UI/GameOver/MarginContainer/VBoxContainer/VBoxContainer/RestartButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/GameOver/MarginContainer/VBoxContainer/VBoxContainer/RestartButton" to="UI/GameOver/MarginContainer/VBoxContainer/VBoxContainer/RestartButton" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="UI/GameOver/MarginContainer/VBoxContainer/VBoxContainer/MenuButton" to="UI/GameOver/MarginContainer/VBoxContainer/VBoxContainer/MenuButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/GameOver/MarginContainer/VBoxContainer/VBoxContainer/MenuButton" to="UI/GameOver/MarginContainer/VBoxContainer/VBoxContainer/MenuButton" method="_on_mouse_exited"]
