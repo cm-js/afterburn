@@ -14,6 +14,7 @@ var score
 var best_score
 
 # Enemy management
+@export var enemyList: Array[String] = []
 @export var BASE_ENEMY_SPAWNRATE: float
 var enemy_cooldown
 var enemy_cooldown_cur
@@ -63,7 +64,7 @@ func _process(delta: float) -> void:
 			enemy_cooldown_cur = enemy_cooldown
 			
 			# Clone eneny.tscn with random enemy type
-			var enemy = load("res://scenes/enemy.tscn")
+			var enemy = load(enemyList.pick_random())
 			var instance = enemy.instantiate()
 			add_child(instance)
 			print("Enemy loaded.")
@@ -80,6 +81,10 @@ func _input(event: InputEvent) -> void:
 		elif game_state == "paused":
 			game_state = "active"
 			swap_ui(1)
+	# Spacebar alternative for resuming the game
+	if event.is_action_pressed("resume") && game_state == "paused":
+		game_state = "active"
+		swap_ui(1)
 
 func swap_ui(num: int) -> void:
 	# Loop for each UI element
@@ -119,4 +124,6 @@ func game_reset() -> void:
 	enemy_cooldown = BASE_ENEMY_SPAWNRATE
 	enemy_cooldown_cur = enemy_cooldown
 	
-	# TODO - Delete all instantiated enemy nodes
+	# Delete all instantiated enemy nodes
+	for child in get_children():
+		child.queue_free()

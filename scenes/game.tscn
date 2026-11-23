@@ -60,17 +60,17 @@ fill_to = Vector2(0, 1)
 [sub_resource type="RichTextEffect" id="RichTextEffect_kvpfn"]
 resource_name = "sparkle"
 script = ExtResource("6_0tnpc")
-metadata/rt = 8801663133295
+metadata/rt = 1542212097985
 
 [sub_resource type="RichTextEffect" id="RichTextEffect_dinhu"]
 resource_name = "curspull"
 script = ExtResource("6_gee14")
-metadata/rt = 8801663133295
+metadata/rt = 1542212097985
 
 [sub_resource type="RichTextEffect" id="RichTextEffect_kvuet"]
 resource_name = "jit2"
 script = ExtResource("8_vtaks")
-metadata/rt = 8801663133295
+metadata/rt = 1542212097985
 
 [node name="Game" type="Node2D" unique_id=312370892]
 
@@ -80,9 +80,11 @@ unique_name_in_owner = true
 [node name="GroundManager" type="Node" parent="Managers" unique_id=1993673341 node_paths=PackedStringArray("ground_objs")]
 script = ExtResource("1_lbhrr")
 ground_objs = [NodePath("../../Ground/Ground1"), NodePath("../../Ground/Ground2")]
+PLATFORM_SPAWNRATE = 1.0
 
 [node name="GameManager" type="Node" parent="Managers" unique_id=431671816]
 script = ExtResource("2_iywne")
+enemyList = Array[String](["res://scenes/enemies/missile.tscn"])
 BASE_ENEMY_SPAWNRATE = 3.0
 
 [node name="Player" parent="." unique_id=872563649 instance=ExtResource("1_uwrxv")]
@@ -133,6 +135,7 @@ texture = SubResource("GradientTexture2D_rysoc")
 [node name="ArenaBorders" type="Node" parent="." unique_id=1502354904]
 
 [node name="L_Border" type="Area2D" parent="ArenaBorders" unique_id=1196918401]
+z_index = -1
 position = Vector2(-900, -470)
 scale = Vector2(1, 40)
 collision_layer = 2
@@ -149,6 +152,7 @@ position = Vector2(23, 0)
 texture = SubResource("GradientTexture2D_57nd2")
 
 [node name="R_Border" type="Area2D" parent="ArenaBorders" unique_id=900773948]
+z_index = -1
 position = Vector2(900, -470)
 scale = Vector2(1, 40)
 collision_layer = 2
@@ -166,6 +170,7 @@ position = Vector2(-23, 0)
 texture = SubResource("GradientTexture2D_kvpfn")
 
 [node name="U_Border" type="Area2D" parent="ArenaBorders" unique_id=269452436]
+z_index = -1
 position = Vector2(0, -900)
 scale = Vector2(80, 1)
 collision_layer = 2
