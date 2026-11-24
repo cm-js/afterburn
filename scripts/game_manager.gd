@@ -127,3 +127,6 @@ func game_reset() -> void:
 	# Delete all instantiated enemy nodes
 	for child in get_children():
 		child.queue_free()
+	# Also delete all active platforms
+	for child in ground_manager.get_children():
+		child.queue_free()

@@ -60,17 +60,17 @@ fill_to = Vector2(0, 1)
 [sub_resource type="RichTextEffect" id="RichTextEffect_kvpfn"]
 resource_name = "sparkle"
 script = ExtResource("6_0tnpc")
-metadata/rt = 1542212097985
+metadata/rt = 3423323893075
 
 [sub_resource type="RichTextEffect" id="RichTextEffect_dinhu"]
 resource_name = "curspull"
 script = ExtResource("6_gee14")
-metadata/rt = 1542212097985
+metadata/rt = 3423323893075
 
 [sub_resource type="RichTextEffect" id="RichTextEffect_kvuet"]
 resource_name = "jit2"
 script = ExtResource("8_vtaks")
-metadata/rt = 1542212097985
+metadata/rt = 3423323893075
 
 [node name="Game" type="Node2D" unique_id=312370892]
 
